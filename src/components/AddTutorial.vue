@@ -12,7 +12,7 @@
         text-gray-700
         leading-tight
         focus:outline-none focus:shadow-outline"  v-model="tutorial"/>
-         <!-- <div class="text-left ... mt-4">Description</div>
+         <div class="text-left ... mt-4">Description</div>
  <input placeholder= "Add Todo" class="flex mt-4 
         shadow
         appearance-none
@@ -23,7 +23,7 @@
         px-2
         text-gray-700
         leading-tight
-        focus:outline-none focus:shadow-outline"/> -->
+        focus:outline-none focus:shadow-outline"/>
  <button class="flex-1 p-1 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="addBlog()">
   Submit
  </button>

@@ -1,19 +1,19 @@
 import { createStore } from "vuex";
 import Tutorial from "../types/Tutorial";
-//import { findIndex } from "lodash";
 
 export default createStore({
   state: {
     tutorials: [
       {
-    
+        id: 1,
         title:  "Demo vuex",
-      
+        description: "whole course of vue 3",
         published: false,
       },
       {
+        id: 2,
         title:  "UI Design",
-        
+        description: "whole course of vue 3",
         published: false,
       }
     ] as Tutorial[]

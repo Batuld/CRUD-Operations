@@ -35,12 +35,7 @@
     </button>
    
   </div>
-  <div>
-    <br />
-    <p>Please click on a Tutorial...</p>
-  </div>
 </template>
-
 
 <script lang="ts">
 
