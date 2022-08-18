@@ -13,44 +13,110 @@
         leading-tight
         focus:outline-none focus:shadow-outline
       "
+     v-model="searchData"
       id="username"
       type="text"
       placeholder="Search Tutorials"
     />
-    <button  class="flex-1 bg-gray-400 rounded p-1 mt-4">Search</button>
+    <button  class="flex-1 bg-gray-400 rounded p-1 mt-4" >Search</button>
   </div>
-      
-        <div >
-     <table class="main-table">
+        <div class="flex justify-center">
+     <table>
        <thead>
          <tr>
-        <h4 class="m-2"><b>Tutorials List</b></h4>
+          <th> <h4 class="m-2"><b>Tutorials List</b></h4></th>
          </tr>
        </thead>
-         <tr v-for="tutorial in tutorials" :key="tutorial.title">
+         <tr v-for="tutorial in searchFunction" :key="tutorial.title"  >
+        <!--@click="setActiveTutorial(tutorial, index)"--> 
+         <td class="border border-slate-300 ... w-80">{{tutorial.title}}</td>
          </tr>
+          <div
+          v-if="!searchFunction.length"
+          class="
+            m-10
+            
+            text-xs text-gray-700
+            uppercase
+            dark:bg-gray-700 dark:text-gray-400
+          "
+        >
+          <b>No results found!</b>
+        </div>
      </table>
+      
    </div>
-       <button class="flex-1 bg-gray-400 rounded p-1 m-2">
+  <button class="flex-1 bg-gray-400 rounded p-1 m-4"  @click="deleteTask(tutorial)">
         Remove All
-      </button>
+  </button>
+
+   <div  class="flex-1">
+      <div>
+        <h4><b class="flex-1 p-5 m-4 bg-teal-500 hover:bg-teal-800 text-white font-bold py-2 px-4 rounded">Tutorial</b></h4>
+        <div class="m-3 text-left ...">
+          <label><strong>Title:</strong></label> 
+          <!-- {{ currentTutorial.title }} -->
+        </div>
+        <div class="m-3 text-left ...">
+          <label><strong>Description:</strong></label>
+          <!-- {{ currentTutorial.description }} -->
+        </div>
+        <div class="m-3 text-left ...">
+          <label><strong>Status:</strong></label>
+          <!-- {{ currentTutorial.published ? "Published" : "Pending" }} -->
+        </div>
+        <router-link
+          :to="'/tutorials/' "
+         class="flex-1 p-1 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >Edit</router-link
+        >
+      </div>
+      <div>
+        <br />
+        <p>Please click on a Tutorial...</p>
+      </div>
+    </div>
+      
 </template>
 <script lang="ts">
-//import AddTutorial from '../store/AddTutorial';
-import Tutorial from '../types/Tutorial';
+import Tutorial from "../types/Tutorial";
 import { defineComponent } from "vue";
 
 export default defineComponent ({
   name: 'tutorials',
    data() {
 		return {
-			tutorials: [] as Tutorial[]
+			tutorials: [] as Tutorial[],
+        searchData: "",
+      // currentTutorial: {} as Tutorial,
+      // currentIndex: -1,
+      // title: "",
 		};
 	},
 mounted() {
    this.tutorials = this.$store.state.tutorials;
- },
+   console.log("list",  this.tutorials);
+   
+},
+computed:{
+ searchFunction() {
+      return this.tutorials.filter((tutorial) => {
+        return tutorial.title.toLowerCase().includes(this.searchData.toLowerCase());
+      });
+    },
+},
+  methods: {
+    deleteTask(tutorial: Tutorial) {
+     this.$store.commit("deleteTask", tutorial);
+   }, 
+
+//    setActiveTutorial(tutorial: Tutorial, index = -1) {
+//       this.currentTutorial = tutorial;
+//       this.currentIndex = index;
+//     }
+ }
 })
+  
 </script>
 
 <style>

@@ -1,14 +1,14 @@
 export class Tutorial {
-    id: number;
+    //id: number;
     title: string;
-    description: string;
+    //description: string;
     published: boolean;
 
-    constructor(id:number, title: string, description:string, published:false) {
-        this.id= id;
+    constructor(title: string) {
+        //this.id= id;
         this.title = title;
-        this.description = description;
-        this.published= published;
+        //this.description = description;
+        this.published= false;
       }
     }
     

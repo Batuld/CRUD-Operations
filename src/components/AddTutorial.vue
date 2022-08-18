@@ -23,7 +23,7 @@
         px-2
         text-gray-700
         leading-tight
-        focus:outline-none focus:shadow-outline"/>
+        focus:outline-none focus:shadow-outline"  v-model="description" />
  <button class="flex-1 p-1 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="addBlog()">
   Submit
  </button>
@@ -38,7 +38,14 @@ export default defineComponent({
   name: 'add',
   data() {
    return {
-     tutorial: ""
+     tutorial: "",
+     description: ""
+    //  tutorial: {
+    //     id: 1,
+    //     title: "",
+    //     description: "",
+    //     published: false,
+    //   } as Tutorial,
    };
  },
   methods: {
@@ -47,10 +54,10 @@ export default defineComponent({
        const newTask = new Tutorial(this.tutorial);
        this.$store.commit("setTask", newTask);
        this.tutorial = "";
+       console.log("add",this.tutorial);
        this.$router.push("/");
      }
-   }
-   
+   } 
  }
 })
 </script>
