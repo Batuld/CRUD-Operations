@@ -10,7 +10,7 @@ const routes = [
     component: TutorialsList,
   },
   {
-    path: "/tutorials",
+    path: "/tutorials/:id",
     name: "tutorial-details",
     component: TutorialDetails,
   },

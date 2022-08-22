@@ -6,15 +6,15 @@ export default createStore({
   state: {
     tutorials: [
       {
-        //id: 1,
+        id: 1,
         title:  "Tailwind css",
-        //description: "whole course of vue 3",
+        description: "whole course of vue 3",
         published: false,
       },
       {
-        //id: 2,
+        id: 2,
         title:  "UI & UX ",
-        //description: "whole course of vue 3",
+        description: "vue design course",
         published: false,
       }
     ] as Tutorial[]

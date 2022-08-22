@@ -27,22 +27,24 @@
           <th> <h4 class="m-2"><b>Tutorials List</b></h4></th>
          </tr>
        </thead>
-         <tr v-for="tutorial in searchFunction" :key="tutorial.title"  >
+         <tr :class='{"bg-emerald-200" : index == currentIndex }'
+          v-for="(tutorial, index) in tutorials"
+          :key="index"
+          @click="setActiveTutorial(tutorial, index)">
         <!--@click="setActiveTutorial(tutorial, index)"--> 
          <td class="border border-slate-300 ... w-80">{{tutorial.title}}</td>
          </tr>
-          <div
+          <!-- <div
           v-if="!searchFunction.length"
           class="
             m-10
-            
             text-xs text-gray-700
             uppercase
             dark:bg-gray-700 dark:text-gray-400
           "
         >
           <b>No results found!</b>
-        </div>
+        </div> -->
      </table>
       
    </div>
@@ -51,22 +53,22 @@
   </button>
 
    <div  class="flex-1">
-      <div>
+      <div v-if="currentTutorial.id">
         <h4><b class="flex-1 p-5 m-4 bg-teal-500 hover:bg-teal-800 text-white font-bold py-2 px-4 rounded">Tutorial</b></h4>
         <div class="m-3 text-left ...">
           <label><strong>Title:</strong></label> 
-          <!-- {{ currentTutorial.title }} -->
+          {{ currentTutorial.title }}
         </div>
         <div class="m-3 text-left ...">
           <label><strong>Description:</strong></label>
-          <!-- {{ currentTutorial.description }} -->
+          {{ currentTutorial.description }}
         </div>
         <div class="m-3 text-left ...">
           <label><strong>Status:</strong></label>
-          <!-- {{ currentTutorial.published ? "Published" : "Pending" }} -->
         </div>
         <router-link
-          :to="'/tutorials/' "
+      
+          :to="'/tutorials/' + currentTutorial.id"
          class="flex-1 p-1 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >Edit</router-link
         >
@@ -81,6 +83,7 @@
 <script lang="ts">
 import Tutorial from "../types/Tutorial";
 import { defineComponent } from "vue";
+//import ResponseData from "../types/ResponseData";
 
 export default defineComponent ({
   name: 'tutorials',
@@ -88,8 +91,8 @@ export default defineComponent ({
 		return {
 			tutorials: [] as Tutorial[],
         searchData: "",
-      // currentTutorial: {} as Tutorial,
-      // currentIndex: -1,
+        currentTutorial: {} as Tutorial,
+       currentIndex: -1,
       // title: "",
 		};
 	},
@@ -98,22 +101,24 @@ mounted() {
    console.log("list",  this.tutorials);
    
 },
-computed:{
- searchFunction() {
-      return this.tutorials.filter((tutorial) => {
-        return tutorial.title.toLowerCase().includes(this.searchData.toLowerCase());
-      });
-    },
-},
+// computed:{
+//  searchFunction() {
+//       return this.tutorials.filter((tutorial) => {
+//         return tutorial.title.toLowerCase().includes(this.searchData.toLowerCase());
+//       });
+//     },
+// },
   methods: {
     deleteTask(tutorial: Tutorial) {
      this.$store.commit("deleteTask", tutorial);
    }, 
 
-//    setActiveTutorial(tutorial: Tutorial, index = -1) {
-//       this.currentTutorial = tutorial;
-//       this.currentIndex = index;
-//     }
+   setActiveTutorial(tutorial: Tutorial, index = -1) {
+      this.currentTutorial = tutorial;
+      this.currentIndex = index;
+      console.log("current",tutorial);
+      
+    }
  }
 })
   
